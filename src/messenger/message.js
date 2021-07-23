@@ -47,7 +47,7 @@ const Message = (props) => {
             <div className="row">
  <div className="col-md-9 inner-msg">
         <div className="section-head">
-           <h2>{sender? sender : "" }</h2> 
+           <h2>{sender? sender : "Select Conversation" }</h2> 
         </div>
         
         <div className="message-body">
@@ -65,7 +65,7 @@ const Message = (props) => {
             </div> 
             </div>
              ) 
-             : ""}
+             : "Select any conversation"}
             
             </div>
             

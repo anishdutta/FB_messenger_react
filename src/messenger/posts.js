@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function posts() {
+const Posts = () => {
     return (
         <div>
             hey there gbfgfggf
         </div>
     )
 }
-
+export default Posts

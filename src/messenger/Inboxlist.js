@@ -89,7 +89,7 @@ const Inboxlist=()=> {
                     </div>
                  </div>)
                   :
-                  <div>loading...</div>
+                  <div>Please Login to view messages</div>
                 }
                     
                     

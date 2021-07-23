@@ -25,7 +25,7 @@ const Login = ()=> {
 
       return (
          
-      isLoggedin ? 'Home' : 
+      isLoggedin ? '⚪ Online' : 
       (<div>
           {console.log(uidvalue,user_uid,user_accessToken,)}
             <FacebookLogin

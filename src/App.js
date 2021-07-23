@@ -9,7 +9,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import posts from './messenger/posts';
+import Posts from './messenger/posts';
+
 
 
 function App() {
@@ -48,7 +49,7 @@ function App() {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/users">
-            <posts />
+            <Posts></Posts>
           </Route>
           <Route path="/">
            
