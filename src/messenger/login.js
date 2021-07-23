@@ -1,7 +1,7 @@
 import React, { Component, useState,useEffect } from 'react'
 import FacebookLogin from 'react-facebook-login'
 import { useRecoilState,useRecoilValue } from 'recoil'
-import { access_token,uid } from '../GlobalState'
+import { access_token,uid,pageid } from '../GlobalState'
 import axios from 'axios'
 
 const Login = ()=> {
@@ -9,6 +9,7 @@ const Login = ()=> {
     const [isLoggedin,setisLoggedin] = useState(false)
     const [userData,setUserdata] = useState(null)
     const [user_uid,setUseruid] =  useRecoilState(uid)
+    const [page_id,setpageid] =  useRecoilState(pageid)
     const  uidvalue = useRecoilValue(uid)
 
     useEffect(()=>{
@@ -16,7 +17,7 @@ const Login = ()=> {
         .then(response =>{
           console.log("thanks" ,response.data.data[0].access_token);
           Setuseraccesstoken(response.data.data[0].access_token)
-          
+          setpageid(response.data.data[0].id)
         })
         
     },[user_uid])
