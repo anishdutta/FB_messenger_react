@@ -15,7 +15,7 @@ const Message = (props) => {
     const [sender, setsender] = useState([]);
     const [msg, setmsg] = useState([]);
     const [ismsg, setismsg] = useState([]);
-    const [senderid, setsenderid] = useState([]);
+    const [senderid, setsenderid] = useState("");
     console.log("hey there" +props.data);
     //const accessid = "EAAC0xFohZChEBAMXdI29RAEJ5cHW4Bpi0qNLJo1M5rDjm84SNicojwuUivgHGl3TZBCi6HiMJ5wjc5ULdy7HP1YbvLaczm7yz1A8ZACZAaZA7RkHhFHPHgekfU3jbZCBbRqlXC6zr0H1lD3u0Wf1g3JSjhU94xwiH4ZB3GFWunbr1y5cnHLM3XHbcenr0G028oUheO4kCqZBtwZDZD";
     useEffect(()=>{
@@ -24,23 +24,16 @@ const Message = (props) => {
             setmessage(response.data.messages.data.reverse())
             setsender(response.data.participants.data[0].name)
             setsenderid(response.data.participants.data[0].id)
-             console.log("id of rec"+response.data.participants.data[0].id);
+             console.log("id of rec"+senderid);
         })
     },[props.data])   
     
-    useEffect(()=>{
-        const article = {
-            "messaging_type": "RESPONSE",
-            "recipient":{
-            "id": senderid
-            },
-            "message":{
-            "text": msg
-            }
-        }
-        axios.post(`https://graph.facebook.com/v11.0/me/messages&access_token=${accessid}`, article)
+    function PostMsg(){
+      console.log(senderid);
+        const body ={"messaging_type":"RESPONSE","recipient":"{\n  \"id\": \""+senderid+"\"\n}","message":"{\n  \"text\": \""+msg+"\"\n}"}
+        axios.post(`https://graph.facebook.com/v11.0/me/messages?access_token=${accessid}`, body)
         .then(response => { console.log(response.data) });
-    },[ismsg])
+    }
     console.log("this  is message",mymessage)
     return (
         <div className="col-md-9 message">
@@ -71,7 +64,7 @@ const Message = (props) => {
             
             <div className="send-msg">
                 <input onSubmit={"test tmess" +console.log(msg)} onInput={e => setmsg(e.target.value)} className="form-control" placeholder="Message"/>
-                <button onClick={()=>{setismsg(" yes")}} className="btn btn-success">Send</button>
+                <button onClick={PostMsg} className="btn btn-success">Send</button>
             </div>
         </div>
         
