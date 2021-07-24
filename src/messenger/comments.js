@@ -9,14 +9,40 @@ const Comments =(props)=>{
     const userid = useRecoilValue(uid)
     const page_id = useRecoilValue(pageid)
     const [comments, setcomments] = useState([])
+    const [textInput, setTextInput] = React.useState('');
      
     useEffect(()=>{
+        getComments()
+    },[props.data])  
+
+    function getComments(){
         axios.get(`https://graph.facebook.com/v11.0/${props.data}/comments?fields=message,can_reply_privately,comments&access_token=${accessid}`)
         .then(response =>{
              setcomments(response.data.data)
              console.log("id of rec",response.data);
         })
-    },[props.data])  
+    }
+
+    
+
+    const handleChange = (event) => {
+      
+           setTextInput(event.target.value)
+        
+        
+      }
+
+    function postreply(item){
+        console.log(textInput);
+        
+        const body ={"message":""+textInput+""}
+        axios.post(`https://graph.facebook.com/v11.0/${item}/comments?access_token=${accessid}`, body)
+        .then(response => {
+             console.log(response.data) 
+             setTextInput('')
+             getComments()
+            });
+    }
 
     return(
         <div className="col col-md-6 comments">
@@ -49,6 +75,18 @@ const Comments =(props)=>{
                                         : " "
                                     }
                                 
+                            </li>
+                            <li>
+                                <div className="row reply-box" >
+                                    <div className="col col-md-8">
+                                        <input onChange={handleChange} className="form-control form-reply col-md-10" placeholder="Reply to the above comment"></input>
+
+                                    </div>
+                                    <div className="col col-md-4">
+                                        <button className="btn btn-success btn-reply" onClick={()=>{postreply(comment.id)}}>Send</button>
+                                    </div>
+                                    
+                                </div>
                             </li>
                         </ul>
                      ) : "Click on the post to view comments"
