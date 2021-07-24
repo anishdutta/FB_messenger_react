@@ -70,9 +70,15 @@ const Message = (props) => {
             
             </div>
             
-            <div className="send-msg">
+            <div className="send-msg row">
+                <div className="col-md-10">
                 <input onSubmit={"test tmess" +console.log(msg)} onInput={e => setmsg(e.target.value)} className="form-control" placeholder="Message"/>
-                <button onClick={PostMsg} className="btn btn-success">Send</button>
+
+                </div>
+                <div className="col-md-2">
+                   <button onClick={PostMsg} className="btn btn-success">Send</button>  
+                </div>
+               
             </div>
         </div>
         
