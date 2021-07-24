@@ -19,6 +19,10 @@ const Message = (props) => {
     console.log("hey there" +props.data);
     //const accessid = "EAAC0xFohZChEBAMXdI29RAEJ5cHW4Bpi0qNLJo1M5rDjm84SNicojwuUivgHGl3TZBCi6HiMJ5wjc5ULdy7HP1YbvLaczm7yz1A8ZACZAaZA7RkHhFHPHgekfU3jbZCBbRqlXC6zr0H1lD3u0Wf1g3JSjhU94xwiH4ZB3GFWunbr1y5cnHLM3XHbcenr0G028oUheO4kCqZBtwZDZD";
     useEffect(()=>{
+        getfunc()
+    },[props.data])   
+
+    function getfunc(){
         axios.get(`https://graph.facebook.com/v11.0/${props.data}?fields=name,messages{message,created_time,from},participants&access_token=${accessid}`)
         .then(response =>{
             setmessage(response.data.messages.data.reverse())
@@ -26,13 +30,17 @@ const Message = (props) => {
             setsenderid(response.data.participants.data[0].id)
              console.log("id of rec"+senderid);
         })
-    },[props.data])   
+    }
     
     function PostMsg(){
       console.log(senderid);
         const body ={"messaging_type":"RESPONSE","recipient":"{\n  \"id\": \""+senderid+"\"\n}","message":"{\n  \"text\": \""+msg+"\"\n}"}
         axios.post(`https://graph.facebook.com/v11.0/me/messages?access_token=${accessid}`, body)
-        .then(response => { console.log(response.data) });
+        .then(response => {
+             console.log(response.data) 
+             setmsg("")
+             getfunc()
+            });
     }
     console.log("this  is message",mymessage)
     return (
