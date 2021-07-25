@@ -237,3 +237,12 @@ font-size: 25px;
 .reply-box{
     margin-top: 2%;
 }
+.post-img{
+    background-color: violet;
+    width: 250px;
+    height: 250px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 7px;
+}

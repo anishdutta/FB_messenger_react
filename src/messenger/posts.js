@@ -13,7 +13,7 @@ const Posts = () => {
     const [posts,setPosts] = useState([])
 
     useEffect(()=>{
-        axios.get(`https://graph.facebook.com/v11.0/${page_id}/posts?access_token=${accessid}`)
+        axios.get(`https://graph.facebook.com/v11.0/${page_id}/posts?fields=full_picture,message&access_token=${accessid}`)
         .then(response =>{
           console.log(response.data.data)
           setPosts(response.data.data)
@@ -32,6 +32,12 @@ const Posts = () => {
                   posts.map(post =>
                     <div className="myposts" key={post.id} onClick={()=>{setItem(post.id)}}>
                     {post.message}
+                    {
+                        post.full_picture ?
+                        <div className="post-img" style={{backgroundImage: `url(${post.full_picture})`}}></div>: ""
+                    }
+                    
+                    
                     </div>
                     //  <button className="btn btn-primary" key={post.id} onClick={()=>{setItem(post.id)}}> {post.message}</button>
                      ) : " "

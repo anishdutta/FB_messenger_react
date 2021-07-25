@@ -89,7 +89,7 @@ const Comments =(props)=>{
                                 </div>
                             </li>
                         </ul>
-                     ) : "Click on the post to view comments"
+                     ) : props.data? "No comments available" : "Click on the post to view comments"
             }
                         
                     </div>
