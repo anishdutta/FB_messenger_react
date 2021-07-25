@@ -19,7 +19,7 @@ const Posts = () => {
           setPosts(response.data.data)
         })
         
-    },[userid,accessid])
+    },[pageid,accessid])
     return (
         <div className="container">
             <div className="row posts-page">
