@@ -13,6 +13,7 @@ const Inboxlist=()=> {
     const [posts,setPosts] = useState([])
     const accessid = useRecoilValue(access_token)
     const userid = useRecoilValue(uid)
+    const page_id = useRecoilValue(pageid)
     console.log(posts)
     // state={item: "", data:"", acid: this.accessid};
 
@@ -32,7 +33,7 @@ const Inboxlist=()=> {
     //  accessid = "EAAC0xFohZChEBAFFjNlgWHsNbdydegrq1pJv0N67GEf1e45dbWYAGTfXOAWTMaM2D3IW88tABmzEMNYamkw2ZAkcyhmvy0hx1qWBluFm8j1EGkgMS7ImdU2tzLI6oZCxVZCcxzZCZCqeuUP2HUVXPUjERSGdoK5UF5mCFWnKg9iTQUjyyYV7selQAroTUjHlcQx2v6FI2hdvctwsNE0c9H"
     console.log(accessid);
     useEffect(()=>{
-        axios.get(`https://graph.facebook.com/v11.0/${userid}/conversations?access_token=${accessid}`)
+        axios.get(`https://graph.facebook.com/v11.0/${page_id}/conversations?fields=name,id,senders&access_token=${accessid}`)
         .then(response =>{
         //   console.log(response.data.data[0].id);
           setPosts(response.data.data)
@@ -76,7 +77,7 @@ const Inboxlist=()=> {
                                 <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
                             </div>
                             <div className="col col-md-11">
-                                <span className="list-name bold">{post.id}</span><br/>
+                                <span className="list-name bold">{post.senders.data[0].name}</span><br/>
                         <span className="list-msg ">Facebook DM</span><br/>  
                             </div>
                           
