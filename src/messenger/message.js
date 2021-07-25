@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from 'react'
 import axios from 'axios'
 import {useRecoilValue} from 'recoil';
-import { access_token,uid } from '../GlobalState'
+import { access_token,uid,pageid } from '../GlobalState'
 
 
 const Message = (props) => {
@@ -10,6 +10,7 @@ const Message = (props) => {
     const [posts,setPosts] = useState([])
     const accessid = useRecoilValue(access_token)
     const userid = useRecoilValue(uid)
+    const page_id = useRecoilValue(pageid)
     console.log(posts)
     const [mymessage, setmessage] = useState([]);
     const [sender, setsender] = useState([]);
@@ -55,13 +56,14 @@ const Message = (props) => {
             <div className="msg-lists">
             {mymessage.length ?
              mymessage.map((pdata,idx)=>
-             <div className="row msg-list justify-content-start" key={idx}>
+             <div className={`row msg-list  ${pdata.from.id === page_id ? "flex-row-reverse" : "justify-content-start" }`} key={idx}>
                <div className="col col-md-1">
                 <div className="round-img" style={{backgroundImage: `url("https://i.ibb.co/n0RsmB6/tp.png")`}}>
 
                 </div>
             </div>
-            <div className="col col-md-3 message p-2 mb-1 bg-body p-2 mb-1 bg-body rounded">
+            {console.log("this is name"+pdata.from.name)}
+            <div  className={`col col-md-3 message p-2 mb-1 bg-body p-2 mb-1 bg-body rounded `}>
             {pdata.message}
             </div> 
             </div>
