@@ -16,7 +16,7 @@ const Comments =(props)=>{
     },[props.data])  
 
     function getComments(){
-        axios.get(`https://graph.facebook.com/v11.0/${props.data}/comments?fields=message,can_reply_privately,comments&access_token=${accessid}`)
+        axios.get(`https://graph.facebook.com/v11.0/${props.data}/comments?fields=message,from,comments&access_token=${accessid}`)
         .then(response =>{
              setcomments(response.data.data)
              console.log("id of rec",response.data);
@@ -55,16 +55,18 @@ const Comments =(props)=>{
                     comments.map((comment, idx) =>
                     <ul key={idx}>
                             <li>
-                                <div className="comment">{comment.message}</div>
+                               
+                                <div className="comment"><b>{comment.from.name}:</b><br/>{comment.message}</div>
                                 { comment.comments.data.length?
                                         comment.comments.data.map((commenters, idx) =>
                                         <ul >
                                  
                                     
                     
-                                    {/* <span className="reply-txt">Replies :</span> */}
+                                    {/* <div className="reply-txt">Replies :</div> */}
                                     <li>
-                                       <div className="replies">{commenters.message}</div> 
+                                        
+                                       <div className="replies"><b>{comment.from.name}:</b>:<br/>{commenters.message}</div> 
                                     </li>
                                     
                                 </ul> 

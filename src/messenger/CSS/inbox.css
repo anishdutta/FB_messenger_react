@@ -246,3 +246,7 @@ font-size: 25px;
     background-repeat: no-repeat;
     border-radius: 7px;
 }
+.comment-name{
+    margin-bottom: -2%;
+    margin-top: 1%;
+}
