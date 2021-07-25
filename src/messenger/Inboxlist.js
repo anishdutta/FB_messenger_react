@@ -5,7 +5,7 @@ import Message from './message'
 import './CSS/inbox.css'
 import {useRecoilValue} from 'recoil';
 import { Button, makeStyles } from '@material-ui/core'
-import { access_token,uid } from '../GlobalState'
+import { access_token,pageid,uid } from '../GlobalState'
 const Inboxlist=()=> {
 
     const [item,setItem] = useState("")
@@ -34,7 +34,7 @@ const Inboxlist=()=> {
     useEffect(()=>{
         axios.get(`https://graph.facebook.com/v11.0/${userid}/conversations?access_token=${accessid}`)
         .then(response =>{
-          console.log(response.data.data[0].id);
+        //   console.log(response.data.data[0].id);
           setPosts(response.data.data)
         })
         
@@ -89,7 +89,9 @@ const Inboxlist=()=> {
                     </div>
                  </div>)
                   :
-                  <div>Please Login to view messages</div>
+                  userid?
+                  
+                  <div> {console.log(userid)}No messages found</div>:<div>Please Login to view messages</div>
                 }
                     
                     
