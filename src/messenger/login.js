@@ -15,9 +15,18 @@ const Login = ()=> {
     useEffect(()=>{
         axios.get(`https://graph.facebook.com/${user_uid}/accounts?fields=name,access_token&access_token=${user_accessToken}`)
         .then(response =>{
+          if( Array.isArray(response.data.data) && response.data.data.length){
           console.log("thanks" ,response.data.data[0].access_token);
+          
           Setuseraccesstoken(response.data.data[0].access_token)
           setpageid(response.data.data[0].id)
+          }
+          else{
+            console.log(response.data.length)
+            alert("No page found");
+            window.location.reload();
+          }
+          // console.log(response.data.length)
         })
         
     },[user_uid])
