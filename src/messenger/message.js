@@ -17,6 +17,7 @@ const Message = (props) => {
     const [msg, setmsg] = useState([]);
     const [ismsg, setismsg] = useState([]);
     const [senderid, setsenderid] = useState("");
+    const [userdp, setuserdp] = useState("");
     console.log("hey there" +props.data);
     //const accessid = "EAAC0xFohZChEBAMXdI29RAEJ5cHW4Bpi0qNLJo1M5rDjm84SNicojwuUivgHGl3TZBCi6HiMJ5wjc5ULdy7HP1YbvLaczm7yz1A8ZACZAaZA7RkHhFHPHgekfU3jbZCBbRqlXC6zr0H1lD3u0Wf1g3JSjhU94xwiH4ZB3GFWunbr1y5cnHLM3XHbcenr0G028oUheO4kCqZBtwZDZD";
     useEffect(()=>{
@@ -29,12 +30,21 @@ const Message = (props) => {
             setmessage(response.data.messages.data.reverse())
             setsender(response.data.participants.data[0].name)
             setsenderid(response.data.participants.data[0].id)
+            // console.log(response.data)
              console.log("id of rec"+senderid);
+            
         })
     }
+
+    useEffect(() =>{
+        axios.get(`https://graph.facebook.com/v11.0/${senderid}?access_token=${accessid}`)
+        .then(response =>{
+            setuserdp(response.data.profile_pic)
+        })
+    },[senderid])
     
     function PostMsg(){
-      console.log(senderid);
+    //   console.log(senderid);
         const body ={"messaging_type":"RESPONSE","recipient":"{\n  \"id\": \""+senderid+"\"\n}","message":"{\n  \"text\": \""+msg+"\"\n}"}
         axios.post(`https://graph.facebook.com/v11.0/me/messages?access_token=${accessid}`, body)
         .then(response => {
@@ -58,7 +68,7 @@ const Message = (props) => {
              mymessage.map((pdata,idx)=>
              <div className={`row msg-list  ${pdata.from.id === page_id ? "flex-row-reverse" : "justify-content-start" }`} key={idx}>
                <div className="col col-md-1">
-                <div className="round-img" style={{backgroundImage: `url("https://i.ibb.co/n0RsmB6/tp.png")`}}>
+                <div className="round-img" style={{backgroundImage: `url("${userdp}")`}}>
 
                 </div>
             </div>
@@ -88,7 +98,7 @@ const Message = (props) => {
     <div className="col-md-3 profile">
                 <div className="profile-card">
                     <div className="profile-details d-flex justify-content-center">
-                                    <div className="profile-img " style={{backgroundImage: `url("https://i.ibb.co/n0RsmB6/tp.png")`}}></div>  
+                                    <div className="profile-img " style={{backgroundImage: `url("${userdp}")`}}></div>  
                                     
                                     </div>
                                     <div className="profile-details ">
