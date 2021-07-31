@@ -6,6 +6,13 @@ import './CSS/inbox.css'
 import {useRecoilValue} from 'recoil';
 import { Button, makeStyles } from '@material-ui/core'
 import { access_token,pageid,uid } from '../GlobalState'
+import maillogo from './email.png'
+import richpanellogo from './High-Res-Logo-Icon-Blue.png'
+import myposts from './post2.png'
+import posts from './post.png'
+import {
+    Link
+  } from "react-router-dom";
 const Inboxlist=()=> {
 
     const [item,setItem] = useState("")
@@ -59,6 +66,24 @@ const Inboxlist=()=> {
         return (
           
             <div className="row my_mesg justify-content-md-center"> 
+            <div className="col col-md-1 sidebar">
+                
+                <div className="icons justify-content-md-center" >
+                    <img className="mylogo" src={richpanellogo} alt="Logo"></img>
+                </div>
+                <Link to="./">
+                  <div className="icons justify-content-md-center active">
+                    <img className="mylogo" src={maillogo} alt="Logo"></img>
+                </div>  
+                </Link>
+                
+                <Link to="./users">
+                  <div className="icons justify-content-md-center">
+                    <img className="mylogo" src={myposts} alt="Logo"></img>
+                </div>  
+                </Link>
+                
+            </div>
                 {
                     console.log(posts.length)
                 }

@@ -30,6 +30,7 @@ body{
     height: 100vh;
     overflow: auto;
   border:  1px solid rgb(233, 232, 232);
+  padding-left: 2%;
   
 
 }
@@ -214,7 +215,7 @@ font-size: 25px;
     padding-bottom: 2%;
     padding-right: 2%;
     background-color: whitesmoke;
-    height: 55vh;
+    height: 80vh;
     overflow: auto;
 }
 .mycomments ul{
@@ -249,4 +250,28 @@ font-size: 25px;
 .comment-name{
     margin-bottom: -2%;
     margin-top: 1%;
+}
+.sidebar{
+    background-color: #004E96;
+    width: 6%;
+    padding-left: 0%;
+    padding-right: 0%;
+    
+}
+.icons{
+    justify-content: center;
+    /* background-color: white; */
+    padding: 5%;
+    padding-top: 21%;
+    padding-bottom: 21%;
+    text-align: center;
+    border: 1px solid lightgrey;
+
+}
+.active{
+    background-color: white;
+}
+.mylogo{
+    text-align: center;
+    width: 30px;
 }
