@@ -45,19 +45,9 @@ const Message = (props) => {
 
     function converToLocalTime(serverDate) {
 
-        var dt = new Date(Date.parse(serverDate));
-        var localDate = dt;
-        
-        var gmt = localDate;
-            var min = gmt.getTime() / 1000 / 60; // convert gmt date to minutes
-            var localNow = new Date().getTimezoneOffset(); // get the timezone
-            // offset in minutes
-            var localTime = min - localNow; // get the local time
-    
-        var dateStr = new Date(localTime * 1000 * 60);
-        // dateStr = dateStr.toISOString("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"); // this will return as just the server date format i.e., yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
-        dateStr = dateStr.toString("");
-        return dateStr;
+        var b = serverDate.split(/\D+/);
+        let mystr = `${b[1]}-${b[2]}      ${b[3]}:${b[4]}`
+        return mystr;
     }
     
     function PostMsg(){
@@ -90,10 +80,19 @@ const Message = (props) => {
                 </div>
             </div>
             {console.log("this is name"+pdata.from.name)}
-            <div  className={`col col-md-3 message p-2 mb-1 bg-body p-2 mb-1 bg-body rounded `}>
-            {pdata.message}
-            {/* {converToLocalTime(pdata.created_time)} */}
+            <div  className={`col col-md-3 `}>
+                <div className={` message p-2 mb-1 bg-body p-2 mb-1 bg-body rounded `}>
+                     {pdata.message}
+                </div>
+               
+                <div className="myTime">
+            {converToLocalTime(pdata.created_time)}    
+            </div>
+                
+           
+            
             </div> 
+            
             
             </div>
              ) 
