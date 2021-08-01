@@ -44,6 +44,13 @@ const Comments =(props)=>{
             });
     }
 
+    function converToLocalTime(serverDate) {
+
+        var b = serverDate.split(/\D+/);
+        let mystr = `${b[1]}-${b[2]}      ${b[3]}:${b[4]}`
+        return mystr;
+    }
+
     return(
         <div className="col col-md-6 comments">
                     <div className="post-head">
@@ -57,7 +64,9 @@ const Comments =(props)=>{
                             <li>
                                
                                 <div className="comment"><b>{comment.from.name}:</b><br/>{comment.message}</div>
-                                { comment.comments.data.length?
+                                { 
+                                comment.comments?
+                                comment.comments.data.length?
                                         comment.comments.data.map((commenters, idx) =>
                                         <ul >
                                  
@@ -74,6 +83,7 @@ const Comments =(props)=>{
                                         
                                         )   
                                         
+                                        : " "
                                         : " "
                                     }
                                 
