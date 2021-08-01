@@ -3,8 +3,11 @@ import FacebookLogin from 'react-facebook-login'
 import { useRecoilState,useRecoilValue } from 'recoil'
 import { access_token,uid,pageid } from '../GlobalState'
 import axios from 'axios'
+import { Link, Router, useHistory } from 'react-router-dom'
+
 
 const Login = ()=> {
+    const history = useHistory();
     const [user_accessToken,Setuseraccesstoken] = useRecoilState(access_token)
     const [isLoggedin,setisLoggedin] = useState(false)
     const [userData,setUserdata] = useState(null)
@@ -16,14 +19,16 @@ const Login = ()=> {
         axios.get(`https://graph.facebook.com/${user_uid}/accounts?fields=name,access_token&access_token=${user_accessToken}`)
         .then(response =>{
           if( Array.isArray(response.data.data) && response.data.data.length){
+            
           console.log("thanks" ,response.data.data[0].access_token);
-          
+          history.push("/home");
           Setuseraccesstoken(response.data.data[0].access_token)
           setpageid(response.data.data[0].id)
+          
           }
           else{
             console.log(response.data.length)
-            alert("No page found");
+            alert("No page found linked to this account");
             window.location.reload();
           }
           // console.log(response.data.length)

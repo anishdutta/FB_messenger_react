@@ -11,7 +11,7 @@ import richpanellogo from './High-Res-Logo-Icon-Blue.png'
 import myposts from './post2.png'
 import posts from './post.png'
 import {
-    Link
+    Link, useHistory
   } from "react-router-dom";
 const Inboxlist=()=> {
 
@@ -22,6 +22,7 @@ const Inboxlist=()=> {
     const userid = useRecoilValue(uid)
     const page_id = useRecoilValue(pageid)
     console.log(posts)
+    const history = useHistory();
     // state={item: "", data:"", acid: this.accessid};
 
     // const getdata=(item)=>{
@@ -47,6 +48,11 @@ const Inboxlist=()=> {
         })
         
     },[userid,accessid])
+
+    // useEffect(()=>{
+    //     history.push("/");
+       
+    // },[!userid])
     
     //  useStyles = makeStyles((theme) => ({
     //     root: {
@@ -71,7 +77,7 @@ const Inboxlist=()=> {
                 <div className="icons justify-content-md-center" >
                     <img className="mylogo" src={richpanellogo} alt="Logo"></img>
                 </div>
-                <Link to="./">
+                <Link to="./home">
                   <div className="icons justify-content-md-center active">
                     <img className="mylogo" src={maillogo} alt="Logo"></img>
                 </div>  

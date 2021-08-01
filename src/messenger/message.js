@@ -42,6 +42,23 @@ const Message = (props) => {
             setuserdp(response.data.profile_pic)
         })
     },[senderid])
+
+    function converToLocalTime(serverDate) {
+
+        var dt = new Date(Date.parse(serverDate));
+        var localDate = dt;
+        
+        var gmt = localDate;
+            var min = gmt.getTime() / 1000 / 60; // convert gmt date to minutes
+            var localNow = new Date().getTimezoneOffset(); // get the timezone
+            // offset in minutes
+            var localTime = min - localNow; // get the local time
+    
+        var dateStr = new Date(localTime * 1000 * 60);
+        // dateStr = dateStr.toISOString("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"); // this will return as just the server date format i.e., yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+        dateStr = dateStr.toString("");
+        return dateStr;
+    }
     
     function PostMsg(){
     //   console.log(senderid);
@@ -75,7 +92,9 @@ const Message = (props) => {
             {console.log("this is name"+pdata.from.name)}
             <div  className={`col col-md-3 message p-2 mb-1 bg-body p-2 mb-1 bg-body rounded `}>
             {pdata.message}
+            {/* {converToLocalTime(pdata.created_time)} */}
             </div> 
+            
             </div>
              ) 
              : "Select any conversation"}
@@ -87,7 +106,7 @@ const Message = (props) => {
                 <input onSubmit={"test tmess" +console.log(msg)} onInput={e => setmsg(e.target.value)} className="form-control" placeholder="Message"/>
 
                 </div>
-                <div className="col-md-2">
+                <div className="col-md-1">
                    <button onClick={PostMsg} className="btn btn-success">Send</button>  
                 </div>
                

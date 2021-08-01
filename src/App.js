@@ -10,6 +10,7 @@ import {
   Link
 } from "react-router-dom";
 import Posts from './messenger/posts';
+import Welcome from './messenger/welcome';
 
 
 
@@ -48,12 +49,16 @@ function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+        
           <Route path="/users">
             <Posts></Posts>
           </Route>
-          <Route path="/">
+          <Route path="/home">
            
             <Inboxlist></Inboxlist>
+          </Route>
+          <Route path="/">
+        <Welcome></Welcome>
           </Route>
         </Switch>
       </div>
