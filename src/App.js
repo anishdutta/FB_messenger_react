@@ -53,13 +53,11 @@ function App() {
           <Route path="/users">
             <Posts></Posts>
           </Route>
-          <Route path="/home">
+          <Route path="/" exact>
            
             <Inboxlist></Inboxlist>
           </Route>
-          <Route path="/">
-        <Welcome></Welcome>
-          </Route>
+          
         </Switch>
       </div>
     </Router>

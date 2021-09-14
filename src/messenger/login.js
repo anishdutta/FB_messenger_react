@@ -21,7 +21,7 @@ const Login = ()=> {
           if( Array.isArray(response.data.data) && response.data.data.length){
             
           console.log("thanks" ,response.data.data[0].access_token);
-          history.push("/home");
+          // history.push("/home");
           Setuseraccesstoken(response.data.data[0].access_token)
           setpageid(response.data.data[0].id)
           
