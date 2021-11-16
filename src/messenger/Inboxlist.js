@@ -75,7 +75,7 @@ const Inboxlist=()=> {
             <div className="col col-md-1 sidebar">
                 
                 <div className="icons justify-content-md-center" >
-                    <img className="mylogo" src={richpanellogo} alt="Logo"></img>
+                   
                 </div>
                 <Link to="./">
                   <div className="icons justify-content-md-center active">

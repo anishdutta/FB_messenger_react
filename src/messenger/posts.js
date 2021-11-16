@@ -34,7 +34,7 @@ const Posts = () => {
                 </div>
                 <Link to="./">
                   <div className="icons justify-content-md-center ">
-                    <img className="mylogo" src={maillogo} alt="Logo"></img>
+                    
                 </div>  
                 </Link>
                 
